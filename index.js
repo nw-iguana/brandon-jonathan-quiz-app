@@ -84,26 +84,31 @@ function generateQuestion(question, answers) {
             <h2 class="question">
                 ${question}
             </h2>
-            <form>
-                <fieldset> 
-                    <input type="radio" value="" name="answer1">
-                    <label class="">${answers[0]}</label><br>
-                    <input type="radio" value="" name="answer2">
-                    <label class="">${answers[1]}</label><br>
-                    <input type="radio" value="" name="answer3">
-                    <label class="">${answers[2]}</label><br>
-                    <input type="radio" value="" name="answer4"
-                    <label class="">${answers[3]}</label><br>
-                    <button class="">Submit</button>
-                </fieldset> 
-            </form>
+            <div role="radiogroup">
+                <form>
+                    <fieldset> 
+                        <input id="answerChoice1" type="radio" aria-checked="false" tabindex="1" name="answer">
+                        <label for="answerChoice1" class="answer1">${answers[0]}</label><br>
+                        <input id="answerChoice2" type="radio" aria-checked="false" tabindex="2" name="answer">
+                        <label for="answerChoice2" class="answer2">${answers[1]}</label><br>
+                        <input id="answerChoice3" type="radio" aria-checked="false" tabindex="3" name="answer">
+                        <label for="answerChoice3" class="answer3">${answers[2]}</label><br>
+                        <input id="answerChoice4" type="radio" aria-checked="false" tabindex="4" name="answer"
+                        <label for="answerChoice4" class="answer4">${answers[3]}</label><br>
+                        <button class="submitButton">Submit</button>
+                    </fieldset> 
+                </form>
+            </div>
         </section>`
 }
+
 
 // User sees which question they're on
 
 function currentQuestionNumber() {
     //display question number on DOM
+    STORE.currentQuestion ++;
+    $('.questionCounter').text(`${STORE.currentQuestion} of ${questions.length}`);
 }
 
 // User submits an answer by selecting the radio button
@@ -111,15 +116,35 @@ function currentQuestionNumber() {
 
 function userAnswerSelection() {
     //event listener is listening to user's answer
+    $('.submitButton').on('click', function(event){
+        event.preventDefault();
+        console.log('user selection runs');
+        let answer = $('input:aria-checked').val();
+        if (answer === questions[STORE.currentQuestion].correctAnswer) {
+            correctAnswer();
+        }
+        else {
+            incorrectAnswer();
+        }
+    });
 }
 
 // Validate User's answer as correct or incorrect
 
 function correctAnswer() {
+    
 
 }
 
 function incorrectAnswer() {
+
+}
+
+function ifAnswerIsCorrect() {
+    
+}
+
+function ifAnswerIsWrong() {
 
 }
 
@@ -157,31 +182,14 @@ function restartQuiz() {
 function runQuiz() {
     //insert functions to start quiz
     startQuiz();
+    currentQuestionNumber();
+
     //renderQuestion(); etc.
 }
 
 $(runQuiz);
 
-/* <section role="article" id="question_Page">
-    <h2 class="question">
-        Bacon ipsum dolor amet turkey ham kielbasa 
-        swine tail. Flank pork belly tongue boudin. 
-    </h2>
-    <form>
-        <fieldset> 
-            <label class=""></label>
-            <input type="radio" value="" name="answer1">
-            <label class=""></label><br>
-            <input type="radio" value="" name="answer2">
-            <label class=""></label><br>
-            <input type="radio" value="" name="answer3">
-            <label class=""></label><br>
-            <input type="radio" value="" name="answer4"><br>
-            <button class="">Submit</button>
-        </fieldset> 
-    </form>
-</section>
-
+/*
 <button type="submit" class="">Next Question</button>
 
 <button type="submit">Restart Button</button> */
