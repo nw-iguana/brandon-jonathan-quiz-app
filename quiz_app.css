@@ -38,7 +38,24 @@ h2 {
     border: 5px solid orange;
     color: #000;
     border-radius: 4px;
-    margin-top: 400px;
+    margin-top: 50px;
+}
+
+#submitButton {
+    width: 150px;
+    height: 60px;
+    font-size: 18px;
+    background-color: #fff;
+    border: 5px solid orange;
+    color: #000;
+    border-radius: 4px;
+    margin: 15px;
+}
+
+#submitButton:hover {
+    background-color: orange;
+    border-color: orange;
+    color: #fff;
 }
 
 .startButton:hover {
@@ -53,8 +70,51 @@ ul li{
 
 .score_question_center {
     text-align: center;
-    font-size: 30px;
+    font-size: 40px;
 }
+
+.push_down_footer {
+    margin-top: 350px; 
+}
+
+#answer-form {
+    background-color: #fff;
+    border: 5px solid orange; 
+    border-radius: 4px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 600px;
+    height: 450px;
+}
+
+fieldset {
+    border: 0;
+}
+
+label {
+    color: #000;
+    font-size: 19px;
+    display: flex;
+    margin: 0 auto;
+}
+
+fieldset label:hover {
+    background-color: lightgoldenrodyellow;
+}
+
+input[type="radio"] {
+    margin-right: 8px;
+    font-size: 20px;
+}
+
+.answer {
+    width: 500px;
+    border: 2.5px solid orange;
+    padding: 15px;
+}
+
+
+
 
 
 

@@ -168,24 +168,24 @@ function generateQuestion(question, answers) {
                 <form id="answer-form">
                     <fieldset> 
                         <br>
-                        <label for="answerChoice1" class="answer1">    
-                            <input type="radio" tabindex="1" name="answer" value="${answers[0]}" required>
+                        <label for="answerChoice1" class="answer">    
+                            <input class="radioSpace" type="radio" tabindex="1" name="answer" value="${answers[0]}" required>
                                 ${answers[0]}        
                         </label>
                         <br>
-                        <label for="answerChoice2" class="answer2">    
-                            <input type="radio" name="answer" value="${answers[1]}">
+                        <label for="answerChoice2" class="answer">    
+                            <input class="radioSpace" type="radio" name="answer" value="${answers[1]}">
                                 ${answers[1]}</label>
                         <br>
-                        <label for="answerChoice3" class="answer3">
-                            <input type="radio" name="answer" value="${answers[2]}">
+                        <label for="answerChoice3" class="answer">
+                            <input class="radioSpace" type="radio" name="answer" value="${answers[2]}">
                                 ${answers[2]}</label>
                         <br>
-                        <label for="answerChoice4" class="answer4">
-                            <input type="radio" name="answer" value="${answers[3]}">
+                        <label for="answerChoice4" class="answer">
+                            <input class="radioSpace" type="radio" name="answer" value="${answers[3]}">
                                 ${answers[3]}</label>
                         <br>
-                        <button id="submitButton" tabindex="2">Submit</button>
+                        <div class="centerButton"><button id="submitButton" tabindex="2">Submit</button></div>
                     </fieldset> 
                 </form>
             </div>`
