@@ -80,12 +80,12 @@ function renderQuestion() {
 }
 
 function generateQuestion(question, answers) {
-    return `<section role="article" id="question_Page">
+    return `<div id="question_Page">
             <h2 class="question">
                 ${question}
             </h2>
-            <div role="radiogroup">
-                <form>
+            <div class="answer-selections" role="radiogroup">
+                <form id="answer-form">
                     <fieldset> 
                         <input id="answerChoice1" type="radio" aria-checked="false" tabindex="1" name="answer">
                         <label for="answerChoice1" class="answer1">${answers[0]}</label><br>
@@ -95,7 +95,7 @@ function generateQuestion(question, answers) {
                         <label for="answerChoice3" class="answer3">${answers[2]}</label><br>
                         <input id="answerChoice4" type="radio" aria-checked="false" tabindex="4" name="answer"
                         <label for="answerChoice4" class="answer4">${answers[3]}</label><br>
-                        <button class="submitButton">Submit</button>
+                        <button id="submitButton">Submit</button>
                     </fieldset> 
                 </form>
             </div>
@@ -107,23 +107,21 @@ function generateQuestion(question, answers) {
 
 function currentQuestionNumber() {
     //display question number on DOM
-    STORE.currentQuestion ++;
     $('.questionCounter').text(`${STORE.currentQuestion} of ${questions.length}`);
 }
 
 // User submits an answer by selecting the radio button
 // User clicks submit to confirm answer
 
-function userAnswerSelection() {
+function handleSubmitButton() {
     //event listener is listening to user's answer
-    $('.submitButton').on('click', function(event){
+    $('#answer-form').on('click', '#submitButton', function(event) {
         event.preventDefault();
         console.log('user selection runs');
-        let answer = $('input:aria-checked').val();
+        let answer = $('input:checked').val();
         if (answer === questions[STORE.currentQuestion].correctAnswer) {
             correctAnswer();
-        }
-        else {
+        } else {
             incorrectAnswer();
         }
     });
@@ -132,20 +130,23 @@ function userAnswerSelection() {
 // Validate User's answer as correct or incorrect
 
 function correctAnswer() {
-    
-
+    $('.quiz-feedback').html(ifAnswerIsCorrect());
+    STORE.correct++;
 }
 
 function incorrectAnswer() {
-
+    $('.quiz-feedback').html(ifAnswerIsWrong());
+    STORE.incorrect++;
 }
 
 function ifAnswerIsCorrect() {
-    
+    return `<div class="quiz-feedback">Correct!
+            <button type="button" class="next-button">NEXT</button></div>`
 }
 
 function ifAnswerIsWrong() {
-
+    return `<div class="quiz-feedback">Incorrect!
+            <button type="button" class="next-button">NEXT</button></div>`
 }
 
 // User sees current score
@@ -183,13 +184,8 @@ function runQuiz() {
     //insert functions to start quiz
     startQuiz();
     currentQuestionNumber();
-
+    handleSubmitButton();
     //renderQuestion(); etc.
 }
 
 $(runQuiz);
-
-/*
-<button type="submit" class="">Next Question</button>
-
-<button type="submit">Restart Button</button> */
