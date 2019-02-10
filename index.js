@@ -41,14 +41,81 @@ const questions = [
     {
         question: "How do you select all the items in the active window?",
         answers: [
-            'Command+A',
-            'Command+I',
-            'Command+H',
-            'Command+Alt+T'
+            "Command+A",
+            "Command+I",
+            "Command+H",
+            "Command+Alt+T"
         ],
+        correctAnswer: "Command+A",
+        icon: "",
+        alt: ""
+    },
+
+    {
+        question: "How do you capture a screenshot?",
+        answers: [
+            "Shift+Control+C",
+            "Shift+Command+S",
+            "Command+Control+2",
+            "Command+Shift+4"
+        ],
+        correctAnswer: "Command+Shift+4",
+        icon: "",
+        alt: ""
+    },
+
+    {
+        question: "How do you open the Desktop folder?",
+        answers: [
+            "Shift+Command+D",
+            "Command+Shift+B",
+            "Shift+D",
+            "Command+D"
+        ],
+        correctAnswer: "Shift+Command+D",
+        icon: "",
+        alt: ""
+    },
+
+    {
+        question: "What does Command+Z do?",
+        answers: [
+            "Saves a file",
+            "Undoes the last step",
+            "Quits an application",
+            "Selects an item"
+        ],
+        correctAnswer: "Undoes the last step",
+        icon: "",
+        alt: ""
+    },
+
+    {
+        question: "How do you open the spotlight menu?",
+        answers: [
+            "Shift+O",
+            "Shift+Command+Space",
+            "Command+Space",
+            "Command+O"
+        ],
+        correctAnswer: "Command+Space",
+        icon: "",
+        alt: ""
+    },
+
+    {
+        question: "What does Command+F do?",
+        answers: [
+            'Opens a search box',
+            'Opens a folder',
+            'Duplicates a file',
+            'Opens a file'
+        ],
+        correctAnswer: "Opens a search box",
         icon: "",
         alt: ""
     }
+    
 ];
 
 const STORE = {
@@ -85,7 +152,8 @@ function renderQuestion() {
 }
 
 function generateQuestion(question, answers) {
-    return `<div id="question_Page">
+    if (STORE.currentQuestion + 1 < STORE.numberOfQuestions) {
+        return `<div id="questionPage">
             <h2 class="question">
                 ${question}
             </h2>
@@ -114,6 +182,10 @@ function generateQuestion(question, answers) {
                     </fieldset> 
                 </form>
             </div>`
+    }
+    else {
+        console.log('End of Quiz!');
+    }        
 }
 
 
@@ -145,12 +217,13 @@ function handleSubmitButton() {
 // Validate User's answer as correct or incorrect
 
 function correctAnswer() {
-    $('#question_Page').html(ifAnswerIsCorrect());
+    $('#questionPage').html(ifAnswerIsCorrect());
     STORE.correct++;
+    currentScore();
 }
 
 function incorrectAnswer() {
-    $('#question_Page').html(ifAnswerIsWrong());
+    $('#questionPage').html(ifAnswerIsWrong());
     STORE.incorrect++;
 }
 
@@ -168,13 +241,24 @@ function ifAnswerIsWrong() {
 
 function currentScore() {
     //adding to score variable
+    $('.score').text(`Score: ${STORE.correct}`);
+}
+
+function increaseQuestionNumber() {
+    STORE.currentQuestion++;
 }
 
 // User clicks next to receive next question
 // Next question is delivered
 
-function serveNextQuestion() {
+function handleNextQuestionButton() {
     //pull next question from STORE
+    $('#container').on('click', '.next-button', function(event){
+        console.log('next button clicked');
+        increaseQuestionNumber();
+        generateQuestion(questions[STORE.currentQuestion].question, questions[STORE.currentQuestion].answers);
+        renderQuestion();
+    })
     //based on indexed location in array
     //call renderQuestion()
 
@@ -199,8 +283,11 @@ function runQuiz() {
     //insert functions to start quiz
     handleStartButton();
     handleSubmitButton();
-    //renderQuestion(); etc.
+    handleNextQuestionButton();
+    //renderQuestion();
     currentQuestionNumber();
+    currentScore();
+
 }
 
 $(runQuiz);
