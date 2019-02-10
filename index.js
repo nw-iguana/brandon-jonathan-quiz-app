@@ -114,6 +114,19 @@ const questions = [
         correctAnswer: "Opens a search box",
         icon: "",
         alt: ""
+    },
+
+    {
+        question: "How do you open the emoji keyboard",
+        answers: [
+            'Command+9',
+            'Command+Shift',
+            'Command+Alt+Delete',
+            'Command+Control+Spacebar'
+        ],
+        correctAnswer: "Command+Control+Spacebar",
+        icon: "",
+        alt: ""
     }
     
 ];
@@ -135,24 +148,18 @@ function handleStartButton() {
     });
 }
 
-//startQuiz();
-
 // First question is delivered
 
 function renderQuestion() {
     //pulling question from questions
     let question = questions[STORE.currentQuestion].question;
     let answers = questions[STORE.currentQuestion].answers;
-    let correctAnswer = questions[STORE.currentQuestion].correctAnswer;
-    let correct = STORE.correct;
-    let incorrect = STORE.incorrect;
     let html = generateQuestion(question, answers);
     //add to HTML
     $('.startPage').html(html);
 }
 
 function generateQuestion(question, answers) {
-    if (STORE.currentQuestion + 1 < STORE.numberOfQuestions) {
         return `<div id="questionPage">
             <h2 class="question">
                 ${question}
@@ -162,7 +169,7 @@ function generateQuestion(question, answers) {
                     <fieldset> 
                         <br>
                         <label for="answerChoice1" class="answer1">    
-                            <input type="radio" tabindex="1" name="answer" value="${answers[0]}">
+                            <input type="radio" tabindex="1" name="answer" value="${answers[0]}" required>
                                 ${answers[0]}        
                         </label>
                         <br>
@@ -182,10 +189,6 @@ function generateQuestion(question, answers) {
                     </fieldset> 
                 </form>
             </div>`
-    }
-    else {
-        console.log('End of Quiz!');
-    }        
 }
 
 
@@ -203,13 +206,15 @@ function currentQuestionNumber() {
 function handleSubmitButton() {
     //event listener is listening to user's answer
     $('#container').on('click', '#submitButton', function(event) {
-        event.preventDefault();
         console.log('user selection runs');
         let answer = $('input[name="answer"]:checked').val();
         if (answer === questions[STORE.currentQuestion].correctAnswer) {
             correctAnswer();
+        } else if (answer === undefined) {
+            console.log('no answer selected');
         } else {
             incorrectAnswer();
+            console.log('incorrect answer selected', answer);
         }
     });
 }
@@ -254,29 +259,49 @@ function increaseQuestionNumber() {
 function handleNextQuestionButton() {
     //pull next question from STORE
     $('#container').on('click', '.next-button', function(event){
-        console.log('next button clicked');
-        increaseQuestionNumber();
-        generateQuestion(questions[STORE.currentQuestion].question, questions[STORE.currentQuestion].answers);
-        renderQuestion();
+        if (STORE.currentQuestion + 1 < STORE.numberOfQuestions) {
+            console.log('next button clicked');
+            increaseQuestionNumber();
+            generateQuestion(questions[STORE.currentQuestion].question, questions[STORE.currentQuestion].answers);
+            renderQuestion();
+            currentQuestionNumber();
+        } else {
+            // User reaches end of quiz
+            console.log('end of quiz');
+            renderResults();
+        }
     })
-    //based on indexed location in array
-    //call renderQuestion()
-
-    // why do you put userSelectAnswer in this function?
 }
 
-// Repeat answer submission process
-// User reaches end of quiz
 // User sees final results depending on score
 
+function generateResults() {
+    if (STORE.correct > 8) {
+        return `<div class="highScore">You're a hot key pro!
+        <button type="button" class="restartButton">Restart</button></div>`
+    } else if (STORE.correct >= 5) {
+        return `<div class="highScore">Almost there. Keep studying.
+        <button type="button" class="restartButton">Restart</button></div>`
+    } else {
+        return `<div class="highScore">Here are some resources to help you study up.
+        <a src="">Article about Apple hotkeys</a>
+        <button type="button" class="restartButton">Restart</button></div>`
+    }
+}
+
 function renderResults() {
-    //provides results at the end of the quiz
+    console.log('end of quiz');
+    $('#questionPage').html(generateResults());
 }
 
 // User clicks button to restart quiz
 
-function restartQuiz() {
+function handleRestartButton() {
     //button at the end of quiz to restart/refresh page
+    $('#container').on('click', '.restartButton', function(event) {
+        console.log('restart button clicked');
+        location.reload();
+    })
 }
 
 function runQuiz() {
@@ -284,10 +309,9 @@ function runQuiz() {
     handleStartButton();
     handleSubmitButton();
     handleNextQuestionButton();
-    //renderQuestion();
+    handleRestartButton();
     currentQuestionNumber();
     currentScore();
-
 }
 
 $(runQuiz);
