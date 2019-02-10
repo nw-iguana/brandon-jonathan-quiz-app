@@ -36,14 +36,19 @@ const questions = [
         correctAnswer: "Minimizes the active window",
         icon: "",
         alt: ""
+    },
+
+    {
+        question: "How do you select all the items in the active window?",
+        answers: [
+            'Command+A',
+            'Command+I',
+            'Command+H',
+            'Command+Alt+T'
+        ],
+        icon: "",
+        alt: ""
     }
-
-// 4. How do you select all the items in the active window?
-// a. Command+A (Correct)
-// b. Command+I
-// c. Command+H
-// d. Command+Alt+T
-
 ];
 
 const STORE = {
@@ -54,9 +59,9 @@ const STORE = {
     incorrect: 0
 }
 
-function startQuiz() {
+function handleStartButton() {
     //when start button is clicked, hide intro div, displays question/answer
-    $('.startButton').on('click', function(event) {
+    $('#container').on('click', '.startButton', function(event) {
         console.log('startQuiz runs');
         //$('.startPage').hide();
         renderQuestion();
@@ -87,19 +92,28 @@ function generateQuestion(question, answers) {
             <div class="answer-selections" role="radiogroup">
                 <form id="answer-form">
                     <fieldset> 
-                        <input id="answerChoice1" type="radio" aria-checked="false" tabindex="1" name="answer">
-                        <label for="answerChoice1" class="answer1">${answers[0]}</label><br>
-                        <input id="answerChoice2" type="radio" aria-checked="false" tabindex="2" name="answer">
-                        <label for="answerChoice2" class="answer2">${answers[1]}</label><br>
-                        <input id="answerChoice3" type="radio" aria-checked="false" tabindex="3" name="answer">
-                        <label for="answerChoice3" class="answer3">${answers[2]}</label><br>
-                        <input id="answerChoice4" type="radio" aria-checked="false" tabindex="4" name="answer"
-                        <label for="answerChoice4" class="answer4">${answers[3]}</label><br>
-                        <button id="submitButton">Submit</button>
+                        <br>
+                        <label for="answerChoice1" class="answer1">    
+                            <input type="radio" tabindex="1" name="answer" value="${answers[0]}">
+                                ${answers[0]}        
+                        </label>
+                        <br>
+                        <label for="answerChoice2" class="answer2">    
+                            <input type="radio" name="answer" value="${answers[1]}">
+                                ${answers[1]}</label>
+                        <br>
+                        <label for="answerChoice3" class="answer3">
+                            <input type="radio" name="answer" value="${answers[2]}">
+                                ${answers[2]}</label>
+                        <br>
+                        <label for="answerChoice4" class="answer4">
+                            <input type="radio" name="answer" value="${answers[3]}">
+                                ${answers[3]}</label>
+                        <br>
+                        <button id="submitButton" tabindex="2">Submit</button>
                     </fieldset> 
                 </form>
-            </div>
-        </section>`
+            </div>`
 }
 
 
@@ -107,7 +121,8 @@ function generateQuestion(question, answers) {
 
 function currentQuestionNumber() {
     //display question number on DOM
-    $('.questionCounter').text(`${STORE.currentQuestion} of ${questions.length}`);
+    let currentNo = STORE.currentQuestion + 1;
+    $('.questionCounter').text(`${currentNo} of ${questions.length}`);
 }
 
 // User submits an answer by selecting the radio button
@@ -115,10 +130,10 @@ function currentQuestionNumber() {
 
 function handleSubmitButton() {
     //event listener is listening to user's answer
-    $('#answer-form').on('click', '#submitButton', function(event) {
+    $('#container').on('click', '#submitButton', function(event) {
         event.preventDefault();
         console.log('user selection runs');
-        let answer = $('input:checked').val();
+        let answer = $('input[name="answer"]:checked').val();
         if (answer === questions[STORE.currentQuestion].correctAnswer) {
             correctAnswer();
         } else {
@@ -130,12 +145,12 @@ function handleSubmitButton() {
 // Validate User's answer as correct or incorrect
 
 function correctAnswer() {
-    $('.quiz-feedback').html(ifAnswerIsCorrect());
+    $('#question_Page').html(ifAnswerIsCorrect());
     STORE.correct++;
 }
 
 function incorrectAnswer() {
-    $('.quiz-feedback').html(ifAnswerIsWrong());
+    $('#question_Page').html(ifAnswerIsWrong());
     STORE.incorrect++;
 }
 
@@ -182,10 +197,10 @@ function restartQuiz() {
 
 function runQuiz() {
     //insert functions to start quiz
-    startQuiz();
-    currentQuestionNumber();
+    handleStartButton();
     handleSubmitButton();
     //renderQuestion(); etc.
+    currentQuestionNumber();
 }
 
 $(runQuiz);
