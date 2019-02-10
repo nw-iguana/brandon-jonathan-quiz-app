@@ -1,0 +1,64 @@
+* {
+    font-family: 'Roboto:400', sans-serif;
+    color: #fff;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url("keyboard.jpeg");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+h1 {
+    font-family: 'Roboto:700', sans-serif;
+    text-align: center;
+    font-size: 60px;
+    
+}
+
+h2 {
+    font-family: 'Roboto:700', sans-serif;
+    text-align: center;
+    font-size: 30px;
+}
+
+.centerButton {
+    text-align: center;
+}
+
+.startButton {
+    width: 150px;
+    height: 60px;
+    font-size: 18px;
+    background-color: #fff;
+    border: 5px solid orange;
+    color: #000;
+    border-radius: 4px;
+    margin-top: 400px;
+}
+
+.startButton:hover {
+    background-color: orange;
+    border-color: #fff;
+}
+
+ul li{
+    display: inline;
+    padding: 40px;
+}
+
+.score_question_center {
+    text-align: center;
+    font-size: 30px;
+}
+
+
+
+
+
+
+
