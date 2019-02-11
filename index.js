@@ -283,7 +283,7 @@ function generateResults() {
     if (STORE.correct > 8) {
         return `<div class="highScore">
             <h2 class="percentage"></h2>
-            <h2 class="blackText">You're a hot key pro!</h2>
+            <h2 class="blackText">You're a Hotkey pro!</h2>
             <img src="https://media.giphy.com/media/3kD720zFVu22rfIA0s/giphy.gif">
             <button type="button" class="restartButton">Restart</button></div>`
     } else if (STORE.correct >= 5) {
