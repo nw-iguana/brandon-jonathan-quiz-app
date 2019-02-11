@@ -2,7 +2,7 @@
 
 const questions = [
     {
-        question: "What does Command+Option+H do?",
+        question: "What does Command + Option + H do?",
         answers:[ 
             "Hides all windows except Finder's windows", 
             "Hides the Finder window toolbar", 
@@ -16,17 +16,17 @@ const questions = [
     {
         question: "How do you close your current window?",
         answers:[
-            "Command+W",
-            "Command+Option+Space",
-            "Command+Option+H",
-            "Command+Shift+U"
+            "Command + W",
+            "Command + Option + Space",
+            "Command + Option + H",
+            "Command + Shift + U"
         ],
-        correctAnswer: "Command+W",
+        correctAnswer: "Command + W",
         icon: "",
         alt: ""
     },
     {
-        question: "What does Command+M do?",
+        question: "What does Command + M do?",
         answers: [
             "Displays the Connect to Serve dialog",
             "Minimizes the active window",
@@ -41,12 +41,12 @@ const questions = [
     {
         question: "How do you select all the items in the active window?",
         answers: [
-            "Command+A",
-            "Command+I",
-            "Command+H",
-            "Command+Alt+T"
+            "Command + A",
+            "Command + I",
+            "Command + H",
+            "Command + Alt + T"
         ],
-        correctAnswer: "Command+A",
+        correctAnswer: "Command + A",
         icon: "",
         alt: ""
     },
@@ -54,12 +54,12 @@ const questions = [
     {
         question: "How do you capture a screenshot?",
         answers: [
-            "Shift+Control+C",
-            "Shift+Command+S",
-            "Command+Control+2",
-            "Command+Shift+4"
+            "Shift + Control + C",
+            "Shift + Command + S",
+            "Command + Control + 2",
+            "Command + Shift + 4"
         ],
-        correctAnswer: "Command+Shift+4",
+        correctAnswer: "Command + Shift + 4",
         icon: "",
         alt: ""
     },
@@ -67,18 +67,18 @@ const questions = [
     {
         question: "How do you open the Desktop folder?",
         answers: [
-            "Shift+Command+D",
-            "Command+Shift+B",
-            "Shift+D",
-            "Command+D"
+            "Shift + Command + D",
+            "Command + Shift + B",
+            "Shift + D",
+            "Command + D"
         ],
-        correctAnswer: "Shift+Command+D",
+        correctAnswer: "Shift + Command + D",
         icon: "",
         alt: ""
     },
 
     {
-        question: "What does Command+Z do?",
+        question: "What does Command + Z do?",
         answers: [
             "Saves a file",
             "Undoes the last step",
@@ -93,18 +93,18 @@ const questions = [
     {
         question: "How do you open the spotlight menu?",
         answers: [
-            "Shift+O",
-            "Shift+Command+Space",
-            "Command+Space",
-            "Command+O"
+            "Shift + O",
+            "Shift + Command + Space",
+            "Command + Space",
+            "Command + O"
         ],
-        correctAnswer: "Command+Space",
+        correctAnswer: "Command + Space",
         icon: "",
         alt: ""
     },
 
     {
-        question: "What does Command+F do?",
+        question: "What does Command + F do?",
         answers: [
             'Opens a search box',
             'Opens a folder',
@@ -117,14 +117,14 @@ const questions = [
     },
 
     {
-        question: "How do you open the emoji keyboard",
+        question: "How do you open the emoji keyboard?",
         answers: [
-            'Command+9',
-            'Command+Shift',
-            'Command+Alt+Delete',
-            'Command+Control+Spacebar'
+            'Command + 9',
+            'Command + Shift',
+            'Command + Alt + Delete',
+            'Command + Control + Spacebar'
         ],
-        correctAnswer: "Command+Control+Spacebar",
+        correctAnswer: "Command + Control + Spacebar",
         icon: "",
         alt: ""
     }
@@ -143,8 +143,9 @@ function handleStartButton() {
     //when start button is clicked, hide intro div, displays question/answer
     $('#container').on('click', '.startButton', function(event) {
         console.log('startQuiz runs');
-        //$('.startPage').hide();
         renderQuestion();
+        currentQuestionNumber();
+        currentScore();
     });
 }
 
@@ -168,21 +169,21 @@ function generateQuestion(question, answers) {
                 <form id="answer-form">
                     <fieldset> 
                         <br>
-                        <label for="answerChoice1" class="answer">    
-                            <input class="radioSpace" type="radio" tabindex="1" name="answer" value="${answers[0]}" required>
+                        <label for="radioChecked" class="answer">    
+                            <input class="radio" id="radioChecked" type="radio" tabindex="1" name="answer" value="${answers[0]}" required>
                                 ${answers[0]}        
                         </label>
                         <br>
-                        <label for="answerChoice2" class="answer">    
-                            <input class="radioSpace" type="radio" name="answer" value="${answers[1]}">
+                        <label for="radioChecked1" class="answer">    
+                            <input class="radio" id="radioChecked1" type="radio" name="answer" value="${answers[1]}">
                                 ${answers[1]}</label>
                         <br>
-                        <label for="answerChoice3" class="answer">
-                            <input class="radioSpace" type="radio" name="answer" value="${answers[2]}">
+                        <label for="radioChecked2" class="answer">
+                            <input class="radio" id="radioChecked2" type="radio" name="answer" value="${answers[2]}">
                                 ${answers[2]}</label>
                         <br>
-                        <label for="answerChoice4" class="answer">
-                            <input class="radioSpace" type="radio" name="answer" value="${answers[3]}">
+                        <label for="radioChecked3" class="answer">
+                            <input class="radio" id="radioChecked3" type="radio" name="answer" value="${answers[3]}">
                                 ${answers[3]}</label>
                         <br>
                         <div class="centerButton"><button id="submitButton" tabindex="2">Submit</button></div>
@@ -191,14 +192,12 @@ function generateQuestion(question, answers) {
             </div>`
     }     
 
-
-
 // User sees which question they're on
 
 function currentQuestionNumber() {
     //display question number on DOM
     let currentNo = STORE.currentQuestion + 1;
-    $('.questionCounter').text(`${currentNo} of ${questions.length}`);
+    $('.questionCounter').text(`Question Number: ${currentNo} of ${questions.length}`);
 }
 
 // User submits an answer by selecting the radio button
@@ -231,15 +230,17 @@ function correctAnswer() {
 function incorrectAnswer() {
     $('#questionPage').html(ifAnswerIsWrong());
     STORE.incorrect++;
+    currentScore();
 }
 
 function ifAnswerIsCorrect() {
-    return `<div class="quiz-feedback">Correct!
+    return `<div class="quiz-feedback">Correct!<br>
             <button type="button" class="next-button">NEXT</button></div>`
 }
 
 function ifAnswerIsWrong() {
-    return `<div class="quiz-feedback">Incorrect!
+    return `<div class="quiz-feedback incorrectMessage">Incorrect!<br>
+            The correct answer is, "${questions[STORE.currentQuestion].correctAnswer}"<br> 
             <button type="button" class="next-button">NEXT</button></div>`
 }
 
@@ -247,7 +248,7 @@ function ifAnswerIsWrong() {
 
 function currentScore() {
     //adding to score variable
-    $('.score').text(`Score: ${STORE.correct}`);
+    $('.score').text(`Correct: ${STORE.correct} | Incorrect: ${STORE.incorrect}`);
 }
 
 function increaseQuestionNumber() {
@@ -270,6 +271,8 @@ function handleNextQuestionButton() {
             // User reaches end of quiz
             console.log('end of quiz');
             renderResults();
+            percentageScore();
+            currentQuestionNumber();
         }
     })
 }
@@ -278,14 +281,24 @@ function handleNextQuestionButton() {
 
 function generateResults() {
     if (STORE.correct > 8) {
-        return `<div class="highScore">You're a hot key pro!
-        <button type="button" class="restartButton">Restart</button></div>`
+        return `<div class="highScore">
+            <h2 class="percentage"></h2>
+            <h2 class="blackText">You're a hot key pro!</h2>
+            <img src="https://media.giphy.com/media/3kD720zFVu22rfIA0s/giphy.gif">
+            <button type="button" class="restartButton">Restart</button></div>`
     } else if (STORE.correct >= 5) {
-        return `<div class="highScore">Almost there. Keep studying.
-        <button type="button" class="restartButton">Restart</button></div>`
+        return `<div class="highScore">
+            <h2 class="percentage"></h2>
+            <h2 class="blackText">Almost there. Keep studying.</h2>
+            <img src="https://media.giphy.com/media/QNWKbJNASBum8G54t6/giphy.gif">
+            <button type="button" class="restartButton">Restart</button></div>`
     } else {
-        return `<div class="highScore">Here are some resources to help you study up.
-        <a src="">Article about Apple hotkeys</a>
+        return `<div class="highScore">
+            <h2 class="percentage"></h2>
+            <h2 class="blackText">Here are some resources to help you study up.</h2>
+            <img src="https://media.giphy.com/media/bpEH21sHkWQQ8/giphy.gif">
+            <a class="links" href="https://support.apple.com/en-us/HT201236">Apple's Support</a>
+            <a class="links buttonDown" href="http://www.math.harvard.edu/computing/macintro/keys.html">Harvard Mac OS X Shortcuts</a>
         <button type="button" class="restartButton">Restart</button></div>`
     }
 }
@@ -293,6 +306,14 @@ function generateResults() {
 function renderResults() {
     console.log('end of quiz');
     $('#questionPage').html(generateResults());
+}
+
+function generatePercentage() {
+    return `${(STORE.correct)/(STORE.numberOfQuestions) * 100}%`
+}
+
+function percentageScore() {
+    $('.percentage').text(generatePercentage());
 }
 
 // User clicks button to restart quiz
@@ -311,8 +332,6 @@ function runQuiz() {
     handleSubmitButton();
     handleNextQuestionButton();
     handleRestartButton();
-    currentQuestionNumber();
-    currentScore();
 }
 
 $(runQuiz);
