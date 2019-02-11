@@ -79,6 +79,10 @@ h2 {
     margin-top: 20px;
 }
 
+button {
+    outline: none; 
+  }
+
 ul li{
     display: block;
     padding: 10px;
@@ -223,6 +227,7 @@ input[type='radio']:checked:after {
     display: block;
     text-align: center;
     padding-bottom: 5px;
+    text-decoration: none;
 }
 
 .buttonDown {
@@ -247,6 +252,10 @@ input[type='radio']:checked:after {
 
 ul.score_question_center {
     padding-left: 0;
+}
+
+.tealText {
+    color: turquoise;
 }
 
 /* Tablet Media Query */

@@ -240,7 +240,7 @@ function ifAnswerIsCorrect() {
 
 function ifAnswerIsWrong() {
     return `<div class="quiz-feedback incorrectMessage">Incorrect!<br>
-            The correct answer is, "${questions[STORE.currentQuestion].correctAnswer}"<br> 
+            The correct answer is, "<span class="tealText">${questions[STORE.currentQuestion].correctAnswer}</span>"<br> 
             <button type="button" class="next-button">NEXT</button></div>`
 }
 
@@ -297,7 +297,7 @@ function generateResults() {
             <h2 class="percentage"></h2>
             <h2 class="blackText">Here are some resources to help you study up.</h2>
             <img src="https://media.giphy.com/media/bpEH21sHkWQQ8/giphy.gif">
-            <a class="links" href="https://support.apple.com/en-us/HT201236">Apple's Support</a>
+            <a class="links" href="https://support.apple.com/en-us/HT201236">Apple Support</a>
             <a class="links buttonDown" href="http://www.math.harvard.edu/computing/macintro/keys.html">Harvard Mac OS X Shortcuts</a>
         <button type="button" class="restartButton">Restart</button></div>`
     }
