@@ -197,7 +197,7 @@ function generateQuestion(question, answers) {
 function currentQuestionNumber() {
     //display question number on DOM
     let currentNo = STORE.currentQuestion + 1;
-    $('.questionCounter').text(`Question Number: ${currentNo} of ${questions.length}`);
+    $('.questionCounter').text(`Question: ${currentNo} of ${questions.length}`);
 }
 
 // User submits an answer by selecting the radio button
