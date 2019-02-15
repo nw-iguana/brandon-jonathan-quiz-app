@@ -284,19 +284,19 @@ function generateResults() {
         return `<div class="highScore">
             <h2 class="percentage"></h2>
             <h2 class="blackText">You're a Hotkey pro!</h2>
-            <img src="https://media.giphy.com/media/3kD720zFVu22rfIA0s/giphy.gif">
+            <img src="https://media.giphy.com/media/3kD720zFVu22rfIA0s/giphy.gif" alt="victory gif">
             <button type="button" class="restartButton">Restart</button></div>`
     } else if (STORE.correct >= 5) {
         return `<div class="highScore">
             <h2 class="percentage"></h2>
             <h2 class="blackText">Almost there. Keep studying.</h2>
-            <img src="https://media.giphy.com/media/QNWKbJNASBum8G54t6/giphy.gif">
+            <img src="https://media.giphy.com/media/QNWKbJNASBum8G54t6/giphy.gif" alt="almost there gif">
             <button type="button" class="restartButton">Restart</button></div>`
     } else {
         return `<div class="highScore">
             <h2 class="percentage"></h2>
             <h2 class="blackText">Here are some resources to help you study up.</h2>
-            <img src="https://media.giphy.com/media/bpEH21sHkWQQ8/giphy.gif">
+            <img src="https://media.giphy.com/media/bpEH21sHkWQQ8/giphy.gif" alt="study more gif">
             <a class="links" href="https://support.apple.com/en-us/HT201236">Apple Support</a>
             <a class="links buttonDown" href="http://www.math.harvard.edu/computing/macintro/keys.html">Harvard Mac OS X Shortcuts</a>
         <button type="button" class="restartButton">Restart</button></div>`
