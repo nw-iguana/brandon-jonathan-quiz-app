@@ -146,6 +146,7 @@ function handleStartButton() {
         renderQuestion();
         currentQuestionNumber();
         currentScore();
+        $('.questionCounter').show();
     });
 }
 
@@ -197,7 +198,12 @@ function generateQuestion(question, answers) {
 function currentQuestionNumber() {
     //display question number on DOM
     let currentNo = STORE.currentQuestion + 1;
+    $('.score').show();
     $('.questionCounter').text(`Question: ${currentNo} of ${questions.length}`);
+}
+
+function hideQuestionNumber() {
+    $('.questionCounter').hide();
 }
 
 // User submits an answer by selecting the radio button
@@ -248,7 +254,12 @@ function ifAnswerIsWrong() {
 
 function currentScore() {
     //adding to score variable
+    $('.score').show();
     $('.score').text(`Correct: ${STORE.correct} | Incorrect: ${STORE.incorrect}`);
+}
+
+function hideScore() {
+    $('.score').hide();
 }
 
 function increaseQuestionNumber() {
@@ -322,8 +333,35 @@ function handleRestartButton() {
     //button at the end of quiz to restart/refresh page
     $('#container').on('click', '.restartButton', function(event) {
         console.log('restart button clicked');
-        location.reload();
+        resetStore();
+        renderStartPageRestart();
+        hideScore();
+        hideQuestionNumber();
     })
+}
+
+//clearing the store to start at the beginning
+
+function resetStore() {
+    console.log('STORE reset')
+    STORE.correct = 0;
+    STORE.incorrect = 0;
+    STORE.currentQuestion = 0;
+}
+
+function renderStartPageRestart() {
+    console.log('restart completed')
+    $('.startPage').html(generateStartPage());
+}
+
+function generateStartPage() {
+    return `<div class="startPage">
+                <h2 class="moveH2">
+                    Let's find out how well you know your Hotkeys!
+                </h2>
+            <!-- Start Button -->
+            <div class="centerButton"><button type="button" class="startButton">Start</button></div>
+            </div>`
 }
 
 function runQuiz() {
