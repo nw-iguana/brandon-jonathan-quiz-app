@@ -146,7 +146,6 @@ function handleStartButton() {
         renderQuestion();
         currentQuestionNumber();
         currentScore();
-        $('.score').show();
         $('.questionCounter').show();
     });
 }
@@ -199,6 +198,7 @@ function generateQuestion(question, answers) {
 function currentQuestionNumber() {
     //display question number on DOM
     let currentNo = STORE.currentQuestion + 1;
+    $('.score').show();
     $('.questionCounter').text(`Question: ${currentNo} of ${questions.length}`);
 }
 
@@ -254,6 +254,7 @@ function ifAnswerIsWrong() {
 
 function currentScore() {
     //adding to score variable
+    $('.score').show();
     $('.score').text(`Correct: ${STORE.correct} | Incorrect: ${STORE.incorrect}`);
 }
 
