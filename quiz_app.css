@@ -77,6 +77,7 @@ h2 {
     color: #000;
     border-radius: 4px;
     margin-top: 20px;
+    margin-bottom: 28px;
 }
 
 button {
@@ -85,7 +86,7 @@ button {
 
 ul li{
     display: block;
-    padding: 10px;
+    padding: 5px;
     font-weight: bold;
     font-size: 40px;
 }
@@ -99,7 +100,7 @@ ul li{
 }
 
 .push_down_footer {
-    margin-top: 150px; 
+    margin-top: 50px; 
 }
 
 #answer-form {
@@ -110,7 +111,7 @@ ul li{
     margin-right: auto;
     width: 90%;
     max-width: 600px;
-    height: 475px;
+    height: auto;
 }
 
 fieldset {
@@ -185,7 +186,7 @@ input[type='radio']:checked:after {
     margin-right: auto;
     width: 90%;
     max-width: 400px;
-    height: 225px;
+    height: auto;
     text-align: center;
     color: orange;
     font-size: 50px;
@@ -194,7 +195,8 @@ input[type='radio']:checked:after {
 
 .incorrectMessage {
     font-size: 25px;
-    height: 280px;
+    height: auto;
+    padding: 10px 12px 0 12px;
 }
 
 .highScore {
@@ -207,7 +209,7 @@ input[type='radio']:checked:after {
     max-width: 600px;
     width: 90%;
     font-size: 19px;
-    height: 775px;
+    height: auto;
     color: black;
     text-align: center;
     font-size: 20px;
@@ -271,13 +273,13 @@ ul.score_question_center {
 
     .incorrectMessage {
         font-size: 30px;
-        height: 315px;
         max-width: 450px;
         width: 90%;
+        padding: 15px 20px 0 20px;
     }
 
     .next-button {
-        margin-top: 35px;
+        margin-top: 25px;
     }
 
     .push_down_footer {
@@ -311,35 +313,23 @@ ul.score_question_center {
         font-size: 25px;
     }
 
-    #answer-form {
-        height: 600px;
-    }
-
     label {
         font-size: 10px;
     }
 
-    input[type="radio"] {
-        /*margin-top: 18px;*/
-    }
-
     .push_down_footer {
-        margin-top: 45px; 
+        margin-top: 37px; 
     }
 
     .quiz-feedback {
         margin-top: 70px;
-        font-size: 30px;
-        height: 185px;
-    }
-
-    .highScore {
-        height: 610px;
+        font-size: 40px;
+       padding-top: 20px;
     }
 
     .incorrectMessage {
-        font-size: 20px;
-        height: 250px;
+        font-size: 25px;
+        padding: 20px 20px 0 20px;
     }
 }
 
